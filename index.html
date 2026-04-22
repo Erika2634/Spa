@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Proyectos JS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #1a1a2e; color: #eee; }
+    .nav-link { cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación entre proyectos -->
+  <nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand">Mis Proyectos</span>
+    <div>
+      <button class="btn btn-success btn-sm me-2" onclick="mostrarBarber()">BarberKing</button>
+      <button class="btn btn-success btn-sm" onclick="mostrarInventario()">Inventario</button>
+    </div>
+  </nav>
+
+  <!-- Contenedor de BarberKing -->
+  <div id="app-barber" class="container mt-4">
+    <div id="root"></div>
+  </div>
+
+  <!-- Contenedor de Inventario -->
+  <div id="app-inventario" class="container mt-4" style="display:none;">
+    <h4 class="text-success">Inventario — Array Methods</h4>
+    <p class="text-secondary">Abre la consola del navegador (F12) para ver los resultados.</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Cargar ambos archivos JS -->
+  <script src="Fadebarbershop.js"></script>
+  <script src="inventario.js"></script>
+
+  <!-- Lógica para alternar entre los dos -->
+  <script>
+    function mostrarBarber() {
+      document.getElementById('app-barber').style.display = 'block';
+      document.getElementById('app-inventario').style.display = 'none';
+    }
+
+    function mostrarInventario() {
+      document.getElementById('app-barber').style.display = 'none';
+      document.getElementById('app-inventario').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
