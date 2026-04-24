@@ -5,50 +5,401 @@
   <title>Mis Proyectos JS</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background-color: #1a1a2e; color: #eee; }
-    .nav-link { cursor: pointer; }
+    body { background-color: #1a1a2e; color: #eee; min-height: 100vh; }
+
+    .btn-proyecto { min-width: 130px; transition: all .2s; }
+    .btn-proyecto.activo {
+      background-color: #198754 !important;
+      color: #fff !important;
+      border-color: #198754 !important;
+      box-shadow: 0 0 0 3px rgba(25,135,84,0.35);
+    }
+
+    .preview-wrap {
+      border: 3px solid #2a2a4a;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+    }
+    .sep-negro { height: 6px; background: #000; }
+
+    .s1-top  { background:#d4edda; color:#000; border:3px solid #000; height:50px;  display:flex; align-items:center; justify-content:center; font-weight:600; }
+    .s1-mid  { background:#cce5ff; color:#000; border:3px solid #000; border-top:none; height:40px; display:flex; align-items:center; justify-content:center; font-weight:600; }
+    .s1-main { background:#fff3cd; color:#000; border:3px solid #000; border-top:none; height:200px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.3rem; }
+
+    .seccion-row { display:flex; border:3px solid red; }
+    .col-izq {
+      flex: 0 0 55%; border:3px solid red;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:600; font-size:1rem; height:160px; color:#000;
+    }
+    .col-der {
+      flex:1; border:3px solid red;
+      display:flex; flex-direction:column; gap:6px; padding:6px;
+    }
+    .col-der-header {
+      border:3px solid #17a2d4; padding:6px;
+      text-align:center; font-weight:600; flex-shrink:0; color:#000;
+    }
+    .col-der-box {
+      border:3px solid #17a2d4; flex:1;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:600; min-height:50px; color:#000;
+    }
+    .s2 .col-izq, .s2 .col-der-box, .s2 .col-der-header { background:#f8d7da; }
+    .s3 .col-izq, .s3 .col-der-box, .s3 .col-der-header { background:#cfe2ff; }
+
+    .s4-wrap { border:3px solid red; display:flex; flex-direction:column; }
+    .s4-top, .s4-bottom {
+      background:#d4edda; color:#000; border:3px solid red;
+      padding:8px; text-align:center; font-weight:600;
+    }
+    .s4-grid { display:flex; }
+    .s4-col {
+      flex:1; border:2px solid #17a2d4; background:#d4edda;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:600; height:80px; color:#000;
+    }
+
+    #app-inventario .card  { background:#16213e; border:1px solid #2a2a4a; color:#eee; }
+    #app-inventario table  { color:#eee; }
+    #app-inventario .table { --bs-table-bg:transparent; --bs-table-color:#eee; }
+    #app-inventario .result-block {
+      background:#0f3460; border-radius:8px;
+      padding:14px 18px; margin-bottom:10px;
+    }
+    #app-inventario .result-label { font-size:12px; color:#aaa; text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+    #app-inventario .result-val   { font-size:15px; font-weight:600; color:#4ecca3; }
+
+    #app-barber { background:#1a1a2e; }
+    #app-barber .card { background:#16213e; border:1px solid #2a2a4a; color:#eee; }
+    #app-barber .form-control,
+    #app-barber .form-select { background:#0f3460; color:#eee; border-color:#2a2a4a; }
+    #app-barber .form-control::placeholder { color:#aaa; }
   </style>
 </head>
 <body>
 
-  <!-- Barra de navegación entre proyectos -->
-  <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">Mis Proyectos</span>
-    <div>
-      <button class="btn btn-success btn-sm me-2" onclick="mostrarBarber()">BarberKing</button>
-      <button class="btn btn-success btn-sm" onclick="mostrarInventario()">Inventario</button>
-    </div>
+<nav class="navbar navbar-dark bg-dark px-4 py-2">
+  <span class="navbar-brand fw-bold fs-5">📁 Mis Proyectos JS</span>
+  <section class="d-flex gap-2 flex-wrap">
+    <button id="btn-layout"
+      class="btn btn-outline-success btn-sm btn-proyecto activo"
+      onclick="mostrar('layout')">
+      🗂 Layout Bootstrap
+    </button>
+    <button id="btn-barber"
+      class="btn btn-outline-success btn-sm btn-proyecto"
+      onclick="mostrar('barber')">
+      ✂ BarberKing SPA
+    </button>
+    <button id="btn-inventario"
+      class="btn btn-outline-success btn-sm btn-proyecto"
+      onclick="mostrar('inventario')">
+      📦 Inventario JS
+    </button>
+  </section>
+</nav>
+
+
+<!-- PROYECTO 1 — LAYOUT BOOTSTRAP -->
+<section id="app-layout" class="container-fluid mt-4 px-4">
+  <h5 class="text-success mb-3">🗂 Layout Bootstrap — 4 secciones</h5>
+  <section class="preview-wrap" style="border:6px solid purple; padding:6px;">
+    <section>
+      <section class="s1-top">CAJA — Top (8%)</section>
+      <section class="s1-mid">CAJA — Mid (7%)</section>
+      <section class="s1-main">CAJA — Main (85%)</section>
+    </section>
+    <section class="sep-negro"></section>
+    <section class="seccion-row s2">
+      <section class="col-izq">CAJA — Col Izq (55%)</section>
+      <section class="col-der">
+        <section class="col-der-header">CAJA — Header</section>
+        <section class="col-der-box">CAJA</section>
+        <section class="col-der-box">CAJA</section>
+      </section>
+    </section>
+    <section class="sep-negro"></section>
+    <section class="seccion-row s3">
+      <section class="col-izq">CAJA — Col Izq (55%)</section>
+      <section class="col-der">
+        <section class="col-der-box">CAJA</section>
+        <section class="col-der-box">CAJA</section>
+      </section>
+    </section>
+    <section class="sep-negro"></section>
+    <section class="s4-wrap">
+      <section class="s4-top">CAJA — Top</section>
+      <section class="s4-grid">
+        <section class="s4-col">CAJA</section>
+        <section class="s4-col">CAJA</section>
+        <section class="s4-col">CAJA</section>
+        <section class="s4-col">CAJA</section>
+      </section>
+      <section class="s4-bottom">CAJA — Bottom</section>
+    </section>
+  </section>
+</section>
+
+
+<!-- PROYECTO 2 — BARBERKING SPA -->
+<section id="app-barber" class="container mt-4" style="display:none;">
+  <nav class="navbar navbar-expand navbar-dark bg-dark rounded mb-3 px-3">
+    <span class="navbar-brand text-warning fw-bold">✂ BarberKing</span>
+    <section class="navbar-nav flex-row gap-3">
+      <a class="nav-link text-light" href="#" onclick="barberNav('inicio')">Inicio</a>
+      <a class="nav-link text-light" href="#" onclick="barberNav('catalogo')">Servicios</a>
+      <a class="nav-link text-light" href="#" onclick="barberNav('citas')">Citas</a>
+      <a class="nav-link text-light" href="#" onclick="barberNav('nosotros')">Nosotros</a>
+      <a class="nav-link text-danger"  href="#" onclick="barberLogout()">Salir</a>
+    </section>
   </nav>
+  <section id="barber-root"></section>
+</section>
 
-  <!-- Contenedor de BarberKing -->
-  <div id="app-barber" class="container mt-4">
-    <div id="root"></div>
-  </div>
 
-  <!-- Contenedor de Inventario -->
-  <div id="app-inventario" class="container mt-4" style="display:none;">
-    <h4 class="text-success">Inventario — Array Methods</h4>
-    <p class="text-secondary">Abre la consola del navegador (F12) para ver los resultados.</p>
-  </div>
+<!-- PROYECTO 3 — INVENTARIO JS -->
+<section id="app-inventario" class="container mt-4" style="display:none;">
+  <h5 class="text-success mb-4">📦 Inventario — Array Methods (map / filter / find / reduce)</h5>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <section class="card mb-4">
+    <section class="card-header fw-bold text-success">Datos base</section>
+    <section class="card-body p-0">
+      <table class="table table-sm table-bordered mb-0">
+        <thead><tr><th>Nombre</th><th>Precio</th><th>Cantidad</th></tr></thead>
+        <tbody id="tabla-productos"></tbody>
+      </table>
+    </section>
+  </section>
 
-  <!-- Cargar ambos archivos JS -->
-  <script src="Fadebarbershop.js"></script>
-  <script src="inventario.js"></script>
+  <section class="row g-3">
+    <section class="col-md-6">
+      <section class="card">
+        <section class="card-header fw-bold text-warning">Ejercicio 1 — map / filter / find</section>
+        <section class="card-body">
+          <section class="result-block">
+            <section class="result-label">map → nombres en mayúscula</section>
+            <section class="result-val" id="r-map"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">filter → precio menor a $50</section>
+            <section id="r-filter"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">find → "Monitor"</section>
+            <section class="result-val" id="r-find"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">find → "Impresora" (no existe)</section>
+            <section class="result-val" id="r-find2"></section>
+          </section>
+        </section>
+      </section>
+    </section>
 
-  <!-- Lógica para alternar entre los dos -->
-  <script>
-    function mostrarBarber() {
-      document.getElementById('app-barber').style.display = 'block';
-      document.getElementById('app-inventario').style.display = 'none';
-    }
+    <section class="col-md-6">
+      <section class="card">
+        <section class="card-header fw-bold text-warning">Ejercicio 2 — combinar métodos</section>
+        <section class="card-body">
+          <section class="result-block">
+            <section class="result-label">filter (cantidad &lt; 10) → map → valorTotal</section>
+            <section id="r-combo"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">reduce → total bajo stock</section>
+            <section class="result-val" id="r-reduce-combo"></section>
+          </section>
+        </section>
+      </section>
+    </section>
 
-    function mostrarInventario() {
-      document.getElementById('app-barber').style.display = 'none';
-      document.getElementById('app-inventario').style.display = 'block';
-    }
-  </script>
+    <section class="col-md-6">
+      <section class="card">
+        <section class="card-header fw-bold text-warning">Ejercicio 3 — reduce avanzado</section>
+        <section class="card-body">
+          <section class="result-block">
+            <section class="result-label">Total inventario</section>
+            <section class="result-val" id="r-total"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">Producto con mayor stock</section>
+            <section class="result-val" id="r-max"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">Caros (precio &gt; 100)</section>
+            <section id="r-caros"></section>
+          </section>
+          <section class="result-block">
+            <section class="result-label">Baratos (precio ≤ 100)</section>
+            <section id="r-baratos"></section>
+          </section>
+        </section>
+      </section>
+    </section>
+
+    <section class="col-md-6">
+      <section class="card">
+        <section class="card-header fw-bold text-warning">Reto extra — solo reduce</section>
+        <section class="card-body">
+          <section class="result-block">
+            <section class="result-label">Nombres con más de 10 unidades en stock</section>
+            <section class="result-val" id="r-extra"></section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JS NAVEGACIÓN GLOBAL -->
+<script>
+function mostrar(proyecto) {
+  ['layout','barber','inventario'].forEach(p => {
+    document.getElementById('app-' + p).style.display = p === proyecto ? 'block' : 'none';
+    const btn = document.getElementById('btn-' + p);
+    btn.classList.toggle('activo', p === proyecto);
+  });
+  if (proyecto === 'barber') barberInit();
+}
+</script>
+
+<!-- JS BARBERKING SPA -->
+<script>
+const LoginView = () => `
+  <section class="row justify-content-center mt-4">
+    <section class="col-md-4">
+      <h2 class="text-success text-center mb-4">Iniciar Sesión</h2>
+      <section class="mb-3">
+        <label class="form-label">Usuario</label>
+        <input type="text" class="form-control" id="b-usuario" placeholder="admin">
+      </section>
+      <section class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="b-pass" placeholder="1234">
+      </section>
+      <p id="b-error" class="text-danger d-none">Usuario o contraseña incorrectos.</p>
+      <button class="btn btn-success w-100" onclick="handleLogin()">Entrar</button>
+      <p class="text-secondary mt-3 text-center small">Usuario: <b>admin</b> | Contraseña: <b>1234</b></p>
+    </section>
+  </section>`;
+
+const InicioView = () => `
+  <h1 class="text-warning text-center mt-3">✂ Bienvenido a BarberKing</h1>
+  <p class="text-center text-secondary">El mejor estilo, a tu alcance.</p>
+  <hr class="border-warning">
+  <p class="text-center">¿Listo para un cambio de look? Explora nuestros servicios o reserva tu cita.</p>
+  <section class="text-center mt-4">
+    <a href="#" class="btn btn-warning me-3" onclick="barberNav('catalogo')">Ver Servicios</a>
+    <a href="#" class="btn btn-outline-warning" onclick="barberNav('citas')">Reservar Cita</a>
+  </section>`;
+
+const CatalogoView = () => `
+  <h2 class="text-warning text-center mt-3">Nuestros Servicios</h2>
+  <p class="text-center text-secondary mb-4">Elige el servicio que necesitas</p>
+  <section class="row g-4">
+    ${[
+      ['Corte Clásico',       'Corte con tijeras y máquina. Incluye lavado y secado.',     '$25.000'],
+      ['Degradado (Fade)',    'Degradado bajo, medio o alto. Estilo moderno y limpio.',     '$30.000'],
+      ['Arreglo de Barba',   'Perfilado y arreglo completo con productos premium.',         '$20.000'],
+      ['Afeitado con Navaja','Afeitado clásico con navaja, espuma caliente y paño tibio.', '$22.000'],
+      ['Combo Completo',     'Corte + barba + cejas. El tratamiento completo.',             '$45.000'],
+      ['Diseño de Cejas',    'Depilado y perfilado de cejas con hilo o pinzas.',            '$10.000'],
+    ].map(([t,d,p]) => `
+      <section class="col-md-4">
+        <section class="card h-100 border-0">
+          <section class="card-body">
+            <h5 class="card-title text-warning">${t}</h5>
+            <p class="card-text text-secondary">${d}</p>
+            <span class="badge bg-warning text-dark">${p}</span>
+          </section>
+        </section>
+      </section>`).join('')}
+  </section>`;
+
+const CitasView = () => `
+  <section class="row justify-content-center mt-3">
+    <section class="col-md-5">
+      <h2 class="text-warning text-center mb-4">Reservar una Cita</h2>
+      <section class="mb-3">
+        <label class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="cita-nombre" placeholder="Tu nombre">
+      </section>
+      <section class="mb-3">
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" id="cita-tel" placeholder="300 123 4567">
+      </section>
+      <section class="mb-3">
+        <label class="form-label">Servicio</label>
+        <select class="form-select" id="cita-servicio">
+          <option>Corte Clásico</option>
+          <option>Degradado (Fade)</option>
+          <option>Arreglo de Barba</option>
+          <option>Afeitado con Navaja</option>
+          <option>Combo Completo</option>
+          <option>Diseño de Cejas</option>
+        </select>
+      </section>
+      <section class="mb-4">
+        <label class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="cita-fecha">
+      </section>
+      <button class="btn btn-warning w-100" onclick="reservarCita()">Confirmar Reserva</button>
+      <p id="confirmacion" class="text-success text-center mt-3 d-none">¡Cita reservada con éxito! 💈</p>
+    </section>
+  </section>`;
+
+const NosotrosView = () => `
+  <h2 class="text-warning text-center mt-3">¿Quiénes Somos?</h2>
+  <hr class="border-warning">
+  <section class="row justify-content-center">
+    <section class="col-md-7 text-center">
+      <p class="lead">Somos <strong>BarberKing</strong>, una barbería fundada en 2015.</p>
+      <p class="text-secondary">Contamos con 4 barberos certificados y más de 5.000 clientes satisfechos.</p>
+      <hr class="border-secondary">
+      <p class="text-secondary">📍 Calle 45 #12-30, Bogotá &nbsp;|&nbsp; 📞 301 456 7890 &nbsp;|&nbsp; ⏰ Lun–Sáb 9am–8pm</p>
+    </section>
+  </section>`;
+
+let barberLoggedIn = false;
+let barberVista = 'inicio';
+
+function barberInit() { renderBarber(); }
+
+function renderBarber() {
+  const root = document.getElementById('barber-root');
+  if (!barberLoggedIn) { root.innerHTML = LoginView(); return; }
+  const vistas = { inicio: InicioView, catalogo: CatalogoView, citas: CitasView, nosotros: NosotrosView };
+  root.innerHTML = (vistas[barberVista] || InicioView)();
+}
+
+function barberNav(vista) { barberVista = vista; renderBarber(); }
+
+function handleLogin() {
+  const u = document.getElementById('b-usuario').value;
+  const p = document.getElementById('b-pass').value;
+  if (u === 'admin' && p === '1234') {
+    barberLoggedIn = true; barberVista = 'inicio'; renderBarber();
+  } else {
+    document.getElementById('b-error').classList.remove('d-none');
+  }
+}
+
+function reservarCita() {
+  const n = document.getElementById('cita-nombre').value;
+  const t = document.getElementById('cita-tel').value;
+  if (!n || !t) { alert('Por favor completa nombre y teléfono.'); return; }
+  document.getElementById('confirmacion').classList.remove('d-none');
+}
+
+function barberLogout() { barberLoggedIn = false; barberVista = 'inicio'; renderBarber(); }
+</script>
+
+<!-- JS INVENTARIO — DOM + CONSOLA -->
+<script src="inventario.js"></script>
 
 </body>
 </html>
